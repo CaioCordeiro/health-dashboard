@@ -1,38 +1,141 @@
+@font-face {
+  font-family: Lato;
+  src: url("./assets/fonts/Lato/Lato-Regular.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  font-family: Lato;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #f7f7f7;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+::-webkit-scrollbar {
+  height: 0.8rem;
+  width: 0.8rem;
+  background-color: #d0d0d0;
+}
+
+::-webkit-scrollbar-thumb {
+  border: solid 0.2rem #d0d0d0;
+  border-radius: 0.4rem;
+  background-color: #808080;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #606060;
+}
+
 .App {
-  text-align: center;
+  padding: 13%;
+  padding-top: 4%;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  max-width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 2%;
+}
+
+.card-content {
+  height: 74%;
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px;
+  padding-left: 40px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+.header .card-content p {
+  font-family: Lato;
+  font-size: 250%;
+  font-weight: 400;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  margin-left: 40px;
+  white-space: nowrap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.profile-img {
+  width: 5vw;
+  height: 5vw;
+}
+
+.help-status {
+  height: 100%;
+  width: 30%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.help-img {
+  width: 7vw;
+  height: 7vw;
+  margin-right: 15%;
+}
+
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  width: 100%;
+  margin-top: 6vw;
+  /* flex-wrap: wrap; */
+}
+
+.card-img {
+  width: 8vw;
+  height: 8vw;
+  margin-bottom: 1vw;
+}
+
+.cards .card-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  padding-left: 70px;
+  padding-right: 70px;
+  box-sizing: border-box;
+}
+
+.cards .card-content p {
+  font-family: Lato;
+  font-size: 2vw;
+  font-weight: 400;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #9D9D9D;
+  margin: 0.5vw;
+
+}
+
+.status {
+  margin-top: 3vw;
 }
