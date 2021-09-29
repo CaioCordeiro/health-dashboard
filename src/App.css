@@ -97,6 +97,17 @@ code {
   margin-right: 15%;
 }
 
+.led-buttons {
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.led-button.led-active {
+  border-radius: 50%;
+  border: black solid 3px !important;
+}
 
 .cards {
   display: flex;
@@ -131,9 +142,8 @@ code {
   font-weight: 400;
   letter-spacing: 0em;
   text-align: center;
-  color: #9D9D9D;
+  color: #9d9d9d;
   margin: 0.5vw;
-
 }
 
 .status {
