@@ -31,29 +31,53 @@ function App() {
   const [data, setData] = useState(0);
   const [status, setStatus] = useState(0);
   const [led, setLed] = useState(1);
+  const [temperature, setTemperature] = useState(0);
 
-  Amplify.PubSub.subscribe(["powerTopic", "buttonTopic"]).subscribe({
+  const scale = (number, inMin, inMax, outMin, outMax) => {
+    return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  };
+  const trucate = (number, decimals) => {
+    return Number(number.toFixed(decimals));
+  };
+
+  Amplify.PubSub.subscribe([
+    "powerTopic",
+    "buttonTopic",
+    "tempTopic",
+  ]).subscribe({
     next: (data) => {
       console.log(data.value);
       if (data.value.sensor == "acelerometer") {
-        setData(data.value.value);
+        setData(scale(data.value.value, 0, 790, 60, 155));
       }
       if (data.value.sensor == "button") {
         setStatus(data.value.value);
+      }
+      if (data.value.sensor == "temperature") {
+        setTemperature(scale(data.value.value, 100, 400, 0, 45));
       }
     },
     error: (error) => console.error(error),
     close: () => console.log("Done"),
   });
 
+  console.log(data);
   const publishMessageON = () => {
-    Amplify.PubSub.publish("ledTopic", "h");
-    setLed(1);
+    try {
+      Amplify.PubSub.publish("ledTopic", "h");
+      setLed(1);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const publishMessageOFF = () => {
-    Amplify.PubSub.publish("ledTopic", "l");
-    setLed(0);
+    try {
+      Amplify.PubSub.publish("ledTopic", "l");
+      setLed(0);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -91,7 +115,7 @@ function App() {
             <Card bgColor="white">
               <div className="card-content">
                 <img className="card-img" src={heartBeat} />
-                <p>{data}</p>
+                <p>{trucate(data, 0)}</p>
                 <p>bpm</p>
                 <div className="status">
                   <StatusBall variant="small" status="normal" />
@@ -102,33 +126,9 @@ function App() {
           <div className="card-container">
             <Card bgColor="white">
               <div className="card-content">
-                <img className="card-img" src={blood_pressure} />
-                <p>95</p>
-                <p>bpm</p>
-                <div className="status">
-                  <StatusBall variant="small" status="warning" />
-                </div>
-              </div>
-            </Card>
-          </div>
-          <div className="card-container">
-            <Card bgColor="white">
-              <div className="card-content">
-                <img className="card-img" src={gyroscope} />
-                <p>95</p>
-                <p>bpm</p>
-                <div className="status">
-                  <StatusBall variant="small" status="worrying" />
-                </div>
-              </div>
-            </Card>
-          </div>
-          <div className="card-container">
-            <Card bgColor="white">
-              <div className="card-content">
                 <img className="card-img" src={thermometer} />
-                <p>95</p>
-                <p>bpm</p>
+                <p>{trucate(temperature, 0)}</p>
+                <p>ºC</p>
                 <div className="status">
                   <StatusBall variant="small" status="critical" />
                 </div>
